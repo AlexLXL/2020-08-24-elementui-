@@ -1,3 +1,4 @@
+// 判断类型
 export function isString(obj) {
   return Object.prototype.toString.call(obj) === '[object String]';
 }

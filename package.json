@@ -29,6 +29,14 @@
     "test": "npm run lint && npm run build:theme && cross-env CI_ENV=/dev/ BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test:watch": "npm run build:theme && cross-env BABEL_ENV=test karma start test/unit/karma.conf.js"
   },
+  "myAnnotate": [
+    {
+      "files": "外发布的内容有[\"lib\", \"src\", \"packages\", \"types\"], 其中lib是运行打包命令后生成的目录",
+      "scripts": {
+        "dist/pub/dev/test": "参考: https://www.jianshu.com/p/a6f26a79d3eb"
+      }
+    }
+  ],
   "faas": [
     {
       "domain": "element",
