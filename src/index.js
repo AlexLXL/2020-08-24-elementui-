@@ -165,16 +165,20 @@ const components = [
 ];
 
 const install = function(Vue, opts = {}) {
+  // 第一次打开的时候使用的国际化
   locale.use(opts.locale);
   locale.i18n(opts.i18n);
 
+  // 批量注册全局组件
   components.forEach(component => {
     Vue.component(component.name, component);
   });
 
-  Vue.use(InfiniteScroll);
-  Vue.use(Loading.directive);
+  // 插件
+  Vue.use(InfiniteScroll); // 无限滚动-原生的
+  Vue.use(Loading.directive); // v-loading的实现,[之后单独讲一下]
 
+  // 弹窗默认的大小和zIndex(前面的值都获取不到的时候使用，提高代码健壮性)
   Vue.prototype.$ELEMENT = {
     size: opts.size || '',
     zIndex: opts.zIndex || 2000

@@ -1,4 +1,4 @@
-import throttle from 'throttle-debounce/debounce';
+import throttle from 'throttle-debounce/debounce'; // 防抖
 import {
   isHtmlElement,
   isFunction,
@@ -86,6 +86,7 @@ const getScrollOptions = (el, vm) => {
 
 const getElementTop = el => el.getBoundingClientRect().top;
 
+// 主要的方法
 const handleScroll = function(cb) {
   const { el, vm, container, observer } = this[scope];
   const { distance, disabled } = getScrollOptions(el, vm);
