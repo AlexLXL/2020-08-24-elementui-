@@ -40,9 +40,10 @@
             "node build/bin/iconInit.js": "将.el-icon-delete的delete抽取到一个json文件",
             "node build/bin/build-entry.js": "利用模板引擎的方式构建index.js文件",
             "node build/bin/i18n.js": "构建语言文件，国际化",
-            "node build/bin/version.js": "构建examples的版本文件",
+            "node build/bin/version.js": "构建examples的版本文件"
           },
-          "npm run lint": "利用eslint，根据.eslintrc和.eslintignore文件，检测代码规范"
+          "npm run lint": "利用eslint，根据.eslintrc和.eslintignore文件，检测代码规范",
+          "webpack --config build/webpack.conf.js": ""
         }
       }
     }

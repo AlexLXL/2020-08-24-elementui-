@@ -1,6 +1,6 @@
 var path = require('path');
 var fs = require('fs');
-var nodeExternals = require('webpack-node-externals');
+var nodeExternals = require('webpack-node-externals'); // 能够排除 node_modules 目录中所有模块,(打包的时候不会带上node_modules一并打包)，可用于构建npm包
 var Components = require('../components.json');
 
 var utilsList = fs.readdirSync(path.resolve(__dirname, '../src/utils'));
