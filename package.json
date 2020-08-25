@@ -33,7 +33,17 @@
     {
       "files": "外发布的内容有[\"lib\", \"src\", \"packages\", \"types\"], 其中lib是运行打包命令后生成的目录",
       "scripts": {
-        "dist/pub/dev/test": "参考: https://www.jianshu.com/p/a6f26a79d3eb"
+        "dist/pub/dev/test": {
+          "参考": "https://www.jianshu.com/p/a6f26a79d3eb",
+          "clean": "删掉旧文件，rimraf以依赖包的形式包装rm -rf /dist/命令，使用: rimraf /dist/、 /* 是拦截所有的文件夹，不包含子文件夹、/** 是拦截所有的文件夹及里面的子文件夹",
+          "build:file": {
+            "node build/bin/iconInit.js": "将.el-icon-delete的delete抽取到一个json文件",
+            "node build/bin/build-entry.js": "利用模板引擎的方式构建index.js文件",
+            "node build/bin/i18n.js": "构建语言文件，国际化",
+            "node build/bin/version.js": "构建examples的版本文件",
+          },
+          "npm run lint": "利用eslint，根据.eslintrc和.eslintignore文件，检测代码规范"
+        }
       }
     }
   ],

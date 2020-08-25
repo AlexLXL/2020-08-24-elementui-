@@ -1,5 +1,5 @@
 'use strict';
-
+// 构建语言文件，国际化
 var fs = require('fs');
 var path = require('path');
 var langConfig = require('../../examples/i18n/page.json');
