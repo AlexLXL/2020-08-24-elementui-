@@ -54,10 +54,19 @@
             "babel src --out-dir lib --ignore src/index.js": "用Babel处理src下的directive、locale、mixins、transitions和utils，并输出到lib目录"
           },
           "npm run build:umd": "对src/locale/lang下的文件打包，生成umd格式文件，保存在lib/umd/locale",
-          "npm run build:theme": "对packages/theme-chalk下的文件进行打包",
+          "npm run build:theme": "对packages/theme-chalk下的文件进行打包"
         },
         "pub": {
+          "作用": "发布....",
           "npm run bootstrap": "安装依赖，注意的是vue是以peerDependencies的形式配置的",
+          "sh build/git-release.sh": "git checkout dev"
+        },
+        "dev": {
+          "作用": "启动example",
+          "build:file": "上面有",
+          "cross-env NODE_ENV=development": "设置BABEL_ENV=development",
+          "webpack-dev-server --config build/webpack.demo.js": "",
+          "node build/bin/template.js": ""
         }
       }
     }
