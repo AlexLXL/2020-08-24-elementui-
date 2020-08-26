@@ -5,7 +5,9 @@ var basename = require('path').basename;
 var localePath = resolve(__dirname, '../../src/locale/lang');
 var fileList = fs.readdirSync(localePath);
 
+// 利用babel-core及插件add-module-exports和transform-es2015-modules-umd处理src/locale/lang下的文件，生成umd格式的文件；
 var transform = function(filename, name, cb) {
+  // transformFile异步转译文件中的全部内容。 cb 的 result; // => { code, map, ast }
   require('babel-core').transformFile(resolve(localePath, filename), {
     plugins: [
       'add-module-exports',
@@ -31,6 +33,12 @@ fileList
         code = code
           .replace('define(\'', 'define(\'element/locale/')
           .replace('global.', 'global.ELEMENT.lang = global.ELEMENT.lang || {}; \n    global.ELEMENT.lang.');
+        /*
+        * 利用file-save进一步处理，
+        * 如将define('zh-CN'处理成define('element/locale/zh-CN'，
+        * 将global.zhCN = mod.exports处理成global.ELEMENT.lang = global.ELEMENT.lang || {};global.ELEMENT.lang.zhCN = mod.exports;
+        *
+        * */
         save(resolve(__dirname, '../../lib/umd/locale', file)).write(code);
 
         console.log(file);

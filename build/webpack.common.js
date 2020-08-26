@@ -16,7 +16,7 @@ module.exports = {
     chunkFilename: '[id].js',
     libraryExport: 'default',
     library: 'ELEMENT',
-    libraryTarget: 'commonjs2'
+    libraryTarget: 'commonjs2' // commonjs2的方式打包
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],

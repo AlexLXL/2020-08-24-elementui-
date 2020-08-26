@@ -29,13 +29,16 @@
     "test": "npm run lint && npm run build:theme && cross-env CI_ENV=/dev/ BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test:watch": "npm run build:theme && cross-env BABEL_ENV=test karma start test/unit/karma.conf.js"
   },
-  "myAnnotate": [
+  "my-Annotate": [
     {
       "files": "外发布的内容有[\"lib\", \"src\", \"packages\", \"types\"], 其中lib是运行打包命令后生成的目录",
       "scripts": {
-        "dist/pub/dev/test": {
+        "dist": {
           "参考": "https://www.jianshu.com/p/a6f26a79d3eb",
-          "clean": "删掉旧文件，rimraf以依赖包的形式包装rm -rf /dist/命令，使用: rimraf /dist/、 /* 是拦截所有的文件夹，不包含子文件夹、/** 是拦截所有的文件夹及里面的子文件夹",
+          "clean": {
+            "des": "删掉旧文件，rimraf以依赖包的形式包装rm -rf /dist/命令，使用: rimraf /dist/、 /* 是拦截所有的文件夹，不包含子文件夹、/** 是拦截所有的文件夹及里面的子文件夹",
+            "rimraf lib": "webpack --config build/webpack.component.js生成的"
+          },
           "build:file": {
             "node build/bin/iconInit.js": "将.el-icon-delete的delete抽取到一个json文件",
             "node build/bin/build-entry.js": "利用模板引擎的方式构建index.js文件",
@@ -43,7 +46,18 @@
             "node build/bin/version.js": "构建examples的版本文件"
           },
           "npm run lint": "利用eslint，根据.eslintrc和.eslintignore文件，检测代码规范",
-          "webpack --config build/webpack.conf.js": ""
+          "webpack --config build/webpack.conf.js": "对src/index.js打包，以umd形式输出到lib/index.js",
+          "webpack --config build/webpack.common.js": "对src/index.js打包，以commonjs2形式输出到lib/index.js ★commonjs和commonjs2的区别: https://www.jianshu.com/p/f4c7640a629a",
+          "webpack --config build/webpack.component.js": "对packages下的组件(等同components.json)打包，以commonjs2形式分别输出到lib目录，[按需引入]",
+          "npm run build:utils": {
+            "cross-env BABEL_ENV=utils": "设置BABEL_ENV=utils（.babelrc文件中env 选项的值将从 process.env.BABEL_ENV 获取，如果没有的话，则获取 process.env.NODE_ENV 的值，它也无法获取时会设置为 'development' ）",
+            "babel src --out-dir lib --ignore src/index.js": "用Babel处理src下的directive、locale、mixins、transitions和utils，并输出到lib目录"
+          },
+          "npm run build:umd": "对src/locale/lang下的文件打包，生成umd格式文件，保存在lib/umd/locale",
+          "npm run build:theme": "对packages/theme-chalk下的文件进行打包",
+        },
+        "pub": {
+          "npm run bootstrap": "安装依赖，注意的是vue是以peerDependencies的形式配置的",
         }
       }
     }
@@ -86,6 +100,10 @@
     "resize-observer-polyfill": "^1.5.0",
     "throttle-debounce": "^1.0.1"
   },
+  "peerDependencies-Annotate": [
+    "https://blog.csdn.net/hujinyuan357/article/details/99621542",
+    "指定宿主版本，类似之前的珠海巡检的elementui版本的升级，宿主版本应该2.x，但引入了1.x版本页面整个卡住了"
+  ],
   "peerDependencies": {
     "vue": "^2.5.17"
   },

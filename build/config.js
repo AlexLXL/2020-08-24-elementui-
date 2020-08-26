@@ -14,7 +14,7 @@ Object.keys(Components).forEach(function(key) {
 
 externals['element-ui/src/locale'] = 'element-ui/lib/locale';
 utilsList.forEach(function(file) {
-  file = path.basename(file, '.js');
+  file = path.basename(file, '.js'); // 返回文件名
   externals[`element-ui/src/utils/${file}`] = `element-ui/lib/utils/${file}`;
 });
 mixinsList.forEach(function(file) {
