@@ -50,7 +50,7 @@
           "webpack --config build/webpack.common.js": "对src/index.js打包，以commonjs2形式输出到lib/index.js ★commonjs和commonjs2的区别: https://www.jianshu.com/p/f4c7640a629a",
           "webpack --config build/webpack.component.js": "对packages下的组件(等同components.json)打包，以commonjs2形式分别输出到lib目录，[按需引入]",
           "npm run build:utils": {
-            "cross-env BABEL_ENV=utils": "设置BABEL_ENV=utils（.babelrc文件中env 选项的值将从 process.env.BABEL_ENV 获取，如果没有的话，则获取 process.env.NODE_ENV 的值，它也无法获取时会设置为 'development' ）",
+            "cross-env BABEL_ENV=utils": "cross-env是为了兼容各平台命令，防止出现阻塞、异常、报错问题，设置BABEL_ENV=utils（.babelrc文件中env 选项的值将从 process.env.BABEL_ENV 获取，如果没有的话，则获取 process.env.NODE_ENV 的值，它也无法获取时会设置为 'development' ）",
             "babel src --out-dir lib --ignore src/index.js": "用Babel处理src下的directive、locale、mixins、transitions和utils，并输出到lib目录"
           },
           "npm run build:umd": "对src/locale/lang下的文件打包，生成umd格式文件，保存在lib/umd/locale",
@@ -65,8 +65,11 @@
           "作用": "启动example",
           "build:file": "上面有",
           "cross-env NODE_ENV=development": "设置BABEL_ENV=development",
-          "webpack-dev-server --config build/webpack.demo.js": "",
+          "webpack-dev-server --config build/webpack.demo.js": "打包./examples/entry.js'文件，输出examples/element-ui",
           "node build/bin/template.js": ""
+        },
+        "test": {
+          "作用": "通过karma测试工具和mocha, sinon-chai测试框架进行单元测试"
         }
       }
     }

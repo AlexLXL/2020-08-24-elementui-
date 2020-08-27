@@ -1,6 +1,7 @@
 import navConfig from './nav.config';
 import langs from './i18n/route';
 
+// 右上角导航栏的切换
 const LOAD_MAP = {
   'zh-CN': name => {
     return r => require.ensure([], () =>
@@ -28,6 +29,7 @@ const load = function(lang, path) {
   return LOAD_MAP[lang](path);
 };
 
+// 获取右侧的markdown文件
 const LOAD_DOCS_MAP = {
   'zh-CN': path => {
     return r => require.ensure([], () =>
@@ -55,6 +57,7 @@ const loadDocs = function(lang, path) {
   return LOAD_DOCS_MAP[lang](path);
 };
 
+// 注册路由(组件的)
 const registerRoute = (navConfig) => {
   let route = [];
   Object.keys(navConfig).forEach((lang, index) => {
@@ -105,6 +108,7 @@ const registerRoute = (navConfig) => {
 
 let route = registerRoute(navConfig);
 
+// 注册路由(指南/主题/资源)
 const generateMiscRoutes = function(lang) {
   let guideRoute = {
     path: `/${ lang }/guide`, // 指南
@@ -178,6 +182,7 @@ if (userLanguage.indexOf('zh-') !== -1) {
   defaultPath = '/fr-FR';
 }
 
+// 没有注册过的路由都默认跳转到首页
 route = route.concat([{
   path: '/',
   redirect: defaultPath
