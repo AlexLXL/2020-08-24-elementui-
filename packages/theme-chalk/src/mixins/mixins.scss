@@ -162,6 +162,7 @@
   }
 }
 
+// is-开头的用这里的【is-开头的使用并集[关联到其它class]，@mixin m的方式更多是独立到顶层的css】
 @mixin when($state) {
   @at-root {
     &.#{$state-prefix + $state} {

@@ -8,6 +8,7 @@
   @return $selector;
 }
 
+// 有没有--
 @function containsModifier($selector) {
   $selector: selectorToString($selector);
 
@@ -18,6 +19,7 @@
   }
 }
 
+// 有没有is-
 @function containWhenFlag($selector) {
   $selector: selectorToString($selector);
 
@@ -28,6 +30,7 @@
   }
 }
 
+// 有没有:
 @function containPseudoClass($selector) {
   $selector: selectorToString($selector);
 
