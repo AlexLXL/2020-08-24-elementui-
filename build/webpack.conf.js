@@ -44,7 +44,7 @@ module.exports = {
   // 提取公共代码：webpack4开始官方移除了commonchunk插件，改用了optimization属性进行更加灵活的配置
   optimization: {
     // minimize: true, // 如果mode是production类型，minimize的默认值是true，执行默认压缩，
-    // 第三方的压缩插件
+    // 第三方的压缩插件，这个选项是webpack4新增的，主要是用来自定义一些优化打包策略。
     minimizer: [
       new TerserPlugin({
         terserOptions: {

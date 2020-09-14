@@ -8,7 +8,7 @@
   @return $selector;
 }
 
-// 有没有--
+// 判断选择器（el-button__body--active）是否包含 ‘--’
 @function containsModifier($selector) {
   $selector: selectorToString($selector);
 
@@ -19,7 +19,7 @@
   }
 }
 
-// 有没有is-
+// 判断选择器（el-button__body.is-active）是否包含 ‘is’
 @function containWhenFlag($selector) {
   $selector: selectorToString($selector);
 
@@ -30,7 +30,7 @@
   }
 }
 
-// 有没有:
+// 判断选择器（el-button__body:before）是否包含伪元素（:hover）
 @function containPseudoClass($selector) {
   $selector: selectorToString($selector);
 
@@ -41,6 +41,7 @@
   }
 }
 
+// hit：命中nest：嵌套
 @function hitAllSpecialNestRule($selector) {
 
   @return containsModifier($selector) or containWhenFlag($selector) or containPseudoClass($selector);
