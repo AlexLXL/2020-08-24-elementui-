@@ -2,7 +2,7 @@ const path = require('path');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin'); // 编译进度条(webpack-dashboard的一种,让打包的过程可视)
 const VueLoaderPlugin = require('vue-loader/lib/plugin'); // 解析和转换 .vue 文件（提取出其中的逻辑代码 script、样式代码 style、以及 HTML 模版 template，再分别把它们交给对应的 Loader 去处理，核心的作用，就是提取）
 const TerserPlugin = require('terser-webpack-plugin'); // webpack新版本中default built-in的工具已经由旧有的uglifyJS变成了terserJS
-// 旧的uglify已经被depreacted处理，相信不久之后的状态就会变成legacy，新的terser更好的性能，对ES6+的语法支持的更多，也同时兼容了babel 7的生态
+// 旧的uglify已经被depreacted注解处理，不建议使用，相信不久之后的状态就会变成legacy，新的terser更好的性能，对ES6+的语法支持的更多，也同时兼容了babel 7的生态
 
 const config = require('./config');
 
@@ -19,7 +19,7 @@ module.exports = {
     // publicPath主要是对你的页面里面引入的资源的路径做对应的补全，常见的就是css文件里面引入的图片
     publicPath: '/dist/',
     filename: 'index.js',
-    // https://www.html.cn/doc/webpack/guides/code-splitting.html
+    // https://www.html.cn/doc/webpack/guides/code-splitting.html  代码分割
     // 非入口 chunk 的名称
     chunkFilename: '[id].js',
     // 开发库library、libraryTarget使用较多、不同的模块化  https://blog.csdn.net/frank_yll/article/details/78992778

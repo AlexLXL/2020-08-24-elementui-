@@ -79,7 +79,7 @@ const webpackConfig = {
           'sass-loader'
         ]
       },
-      // 对markdown文件进行处理，生成右侧区域的内容
+      // ★对markdown文件进行处理，生成右侧区域的内容
       {
         test: /\.md$/,
         use: [

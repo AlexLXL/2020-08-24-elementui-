@@ -1,5 +1,6 @@
 import { once, on } from 'element-ui/src/utils/dom';
 
+// 绑定事件
 export default {
   bind(el, binding, vnode) {
     let interval = null;

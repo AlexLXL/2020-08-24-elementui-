@@ -12,63 +12,67 @@
   "typings": "types/index.d.ts",
   "scripts": {
     "bootstrap": "yarn || npm i",
+    "clean": "rimraf lib && rimraf packages/*/lib && rimraf test/**/coverage",
     "build:file": "node build/bin/iconInit.js & node build/bin/build-entry.js & node build/bin/i18n.js & node build/bin/version.js",
-    "build:theme": "node build/bin/gen-cssfile && gulp build --gulpfile packages/theme-chalk/gulpfile.js && cp-cli packages/theme-chalk/lib lib/theme-chalk",
+    "lint": "eslint src/**/* test/**/* packages/**/* build/**/* --quiet",
     "build:utils": "cross-env BABEL_ENV=utils babel src --out-dir lib --ignore src/index.js",
     "build:umd": "node build/bin/build-locale.js",
-    "clean": "rimraf lib && rimraf packages/*/lib && rimraf test/**/coverage",
+    "build:theme": "node build/bin/gen-cssfile && gulp build --gulpfile packages/theme-chalk/gulpfile.js && cp-cli packages/theme-chalk/lib lib/theme-chalk",
+    "i18n": "node build/bin/i18n.js",
     "deploy:build": "npm run build:file && cross-env NODE_ENV=production webpack --config build/webpack.demo.js && echo element.eleme.io>>examples/element-ui/CNAME",
     "deploy:extension": "cross-env NODE_ENV=production webpack --config build/webpack.extension.js",
     "dev:extension": "rimraf examples/extension/dist && cross-env NODE_ENV=development webpack --watch --config build/webpack.extension.js",
-    "dev": "npm run bootstrap && npm run build:file && cross-env NODE_ENV=development webpack-dev-server --config build/webpack.demo.js & node build/bin/template.js",
     "dev:play": "npm run build:file && cross-env NODE_ENV=development PLAY_ENV=true webpack-dev-server --config build/webpack.demo.js",
+    "test:watch": "npm run build:theme && cross-env BABEL_ENV=test karma start test/unit/karma.conf.js",
     "dist": "npm run clean && npm run build:file && npm run lint && webpack --config build/webpack.conf.js && webpack --config build/webpack.common.js && webpack --config build/webpack.component.js && npm run build:utils && npm run build:umd && npm run build:theme",
-    "i18n": "node build/bin/i18n.js",
-    "lint": "eslint src/**/* test/**/* packages/**/* build/**/* --quiet",
     "pub": "npm run bootstrap && sh build/git-release.sh && sh build/release.sh && node build/bin/gen-indices.js && sh build/deploy-faas.sh",
-    "test": "npm run lint && npm run build:theme && cross-env CI_ENV=/dev/ BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
-    "test:watch": "npm run build:theme && cross-env BABEL_ENV=test karma start test/unit/karma.conf.js"
+    "dev": "npm run bootstrap && npm run build:file && cross-env NODE_ENV=development webpack-dev-server --config build/webpack.demo.js & node build/bin/template.js",
+    "test": "npm run lint && npm run build:theme && cross-env CI_ENV=/dev/ BABEL_ENV=test karma start test/unit/karma.conf.js --single-run"
   },
   "my-Annotate": [
     {
       "files": "外发布的内容有[\"lib\", \"src\", \"packages\", \"types\"], 其中lib是运行打包命令后生成的目录",
       "scripts": {
         "dist": {
-          "参考": "https://www.jianshu.com/p/a6f26a79d3eb",
           "clean": {
-            "des": "删掉旧文件，rimraf以依赖包的形式包装rm -rf /dist/命令，使用: rimraf /dist/、 /* 是拦截所有的文件夹，不包含子文件夹、/** 是拦截所有的文件夹及里面的子文件夹",
-            "rimraf lib": "webpack --config build/webpack.component.js生成的"
+            "des": "删除文件, rimraf等效封装rm -rf /dist/的插件。 /* 是拦截所有的文件夹，不包含子文件夹、/** 是拦截所有的文件夹及里面的子文件夹",
+            "rimraf lib": "webpack --config build/webpack.component.js生成的",
+            "rimraf packages/*/lib": "删除样式theme-chalk里的lib? ===待加注释",
+            "rimraf test/**/coverage": "===待加注释"
           },
           "build:file": {
             "node build/bin/iconInit.js": "将.el-icon-delete的delete抽取到一个json文件",
-            "node build/bin/build-entry.js": "利用模板引擎的方式构建index.js文件",
+            "node build/bin/build-entry.js": "★利用模板引擎的方式构建index.js文件",
             "node build/bin/i18n.js": "构建语言文件，国际化",
             "node build/bin/version.js": "构建examples的版本文件"
           },
           "npm run lint": "利用eslint，根据.eslintrc和.eslintignore文件，检测代码规范",
           "webpack --config build/webpack.conf.js": "对src/index.js打包，以umd形式输出到lib/index.js",
-          "webpack --config build/webpack.common.js": "对src/index.js打包，以commonjs2形式输出到lib/index.js ★commonjs和commonjs2的区别: https://www.jianshu.com/p/f4c7640a629a",
+          "webpack --config build/webpack.common.js": "对src/index.js打包，以commonjs2形式输出到lib/element-ui.common.js   ★commonjs和commonjs2的区别: https://www.jianshu.com/p/f4c7640a629a",
           "webpack --config build/webpack.component.js": "对packages下的组件(等同components.json)打包，以commonjs2形式分别输出到lib目录，[按需引入]",
           "npm run build:utils": {
-            "作用": "国际化",
-            "cross-env BABEL_ENV=utils": "cross-env是为了兼容各平台命令，防止出现阻塞、异常、报错问题，设置BABEL_ENV=utils（.babelrc文件中env 选项的值将从 process.env.BABEL_ENV 获取，如果没有的话，则获取 process.env.NODE_ENV 的值，它也无法获取时会设置为 'development' ）",
-            "babel src --out-dir lib --ignore src/index.js": "用Babel处理src下的directive、locale、mixins、transitions和utils，并输出到lib目录"
+            "作用": "babel处理src的文件，并复制一份到lib",
+            "cross-env BABEL_ENV=utils": "cross-env是为了兼容各平台命令，防止出现阻塞、异常、报错问题，等效于cmd: set BABEL_ENV=utils，设置 ‘环境变量BABEL_ENV’ = utils（.babelrc文件中env 选项的值将从 process.env.BABEL_ENV 获取(process是node的全局属性)，如果没有的话，则获取 process.env.NODE_ENV 的值，它也无法获取时会设置为 'development' ）",
+            "babel src --out-dir lib --ignore src/index.js": "用Babel处理src下的directive自定义指令、locale国际化、mixins组件用的混合文件、transitions动画和utils工具函数，并输出到lib目录"
           },
           "npm run build:umd": {
             "作用": "国际化umd版本",
             "具体操作": "对src/locale/lang下的文件打包，生成umd格式文件，保存在lib/umd/locale"
           },
-          "npm run build:theme": "对packages/theme-chalk下的文件进行打包"
+          "npm run build:theme": "对packages/theme-chalk下的文件进行打包，===待加注释"
         },
         "pub": {
           "作用": "发布....",
-          "npm run bootstrap": "安装依赖，注意的是vue是以peerDependencies的形式配置的",
-          "sh build/git-release.sh": "git checkout dev"
+          "npm run bootstrap": "安装依赖，注意的是vue是以peerDependencies的形式配置的，只是warning提示作用",
+          "sh build/git-release.sh": "sh:shell的意思，git checkout dev",
+          "sh build/release.sh": "发布新版本npm包",
+          "node build/bin/gen-indices.js": "利用algoliasearch进行搜索，需要把examples/docs/下的.md文件内容以一定格式上传给algolia",
+          "sh build/deploy-faas.sh": "git checkout dev",
         },
         "dev": {
           "作用": "启动example",
           "build:file": "上面有",
-          "cross-env NODE_ENV=development": "设置BABEL_ENV=development",
+          "cross-env NODE_ENV=development": "设置NODE_ENV=development",
           "webpack-dev-server --config build/webpack.demo.js": "打包./examples/entry.js'文件，输出examples/element-ui",
           "node build/bin/template.js": "监测./examples/pages/template是否发生变化"
         },

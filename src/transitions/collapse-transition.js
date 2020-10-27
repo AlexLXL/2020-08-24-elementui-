@@ -3,6 +3,7 @@ import { addClass, removeClass } from 'element-ui/src/utils/dom';
 class Transition {
   beforeEnter(el) {
     addClass(el, 'collapse-transition');
+    // HTMLElement.dataset是一个DOMString的映射,保存所有自定义数据属性(data-*)集
     if (!el.dataset) el.dataset = {};
 
     el.dataset.oldPaddingTop = el.style.paddingTop;
