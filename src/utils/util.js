@@ -142,6 +142,7 @@ export const autoprefixer = function(style) {
 };
 
 export const kebabCase = function(str) {
+  // $1是第一个小括号里的 ,$2是第2个小括号里的
   const hyphenateRE = /([^-])([A-Z])/g;
   return str
     .replace(hyphenateRE, '$1-$2')
