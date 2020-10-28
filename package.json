@@ -49,7 +49,7 @@
           "npm run lint": "利用eslint，根据.eslintrc和.eslintignore文件，检测代码规范",
           "webpack --config build/webpack.conf.js": "对src/index.js打包，以umd形式输出到lib/index.js",
           "webpack --config build/webpack.common.js": "对src/index.js打包，以commonjs2形式输出到lib/element-ui.common.js   ★commonjs和commonjs2的区别: https://www.jianshu.com/p/f4c7640a629a",
-          "webpack --config build/webpack.component.js": "对packages下的组件(等同components.json)打包，以commonjs2形式分别输出到lib目录，[按需引入]",
+          "webpack --config build/webpack.component.js": "对packages下的组件(等同components.json)打包，以commonjs2形式分别输出到lib目录，[★按需引入]",
           "npm run build:utils": {
             "作用": "babel处理src的文件，并复制一份到lib",
             "cross-env BABEL_ENV=utils": "cross-env是为了兼容各平台命令，防止出现阻塞、异常、报错问题，等效于cmd: set BABEL_ENV=utils，设置 ‘环境变量BABEL_ENV’ = utils（.babelrc文件中env 选项的值将从 process.env.BABEL_ENV 获取(process是node的全局属性)，如果没有的话，则获取 process.env.NODE_ENV 的值，它也无法获取时会设置为 'development' ）",
