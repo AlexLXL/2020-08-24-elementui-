@@ -142,10 +142,10 @@ export const autoprefixer = function(style) {
 };
 
 export const kebabCase = function(str) {
-  // $1是第一个小括号里的 ,$2是第2个小括号里的
-  const hyphenateRE = /([^-])([A-Z])/g;
+  // "aa-CDSSOO".replace(/([^-])([A-Z])/g, '$1-$2').replace(/([^-])([A-Z])/g, '$1-$2')  ->  "aa-C-D-S-S-O-O"
+  const hyphenateRE = /([^-])([A-Z])/g; // (不是-,A-Z)
   return str
-    .replace(hyphenateRE, '$1-$2')
+    .replace(hyphenateRE, '$1-$2')  // $1是第一个小括号里的 ,$2是第2个小括号里的
     .replace(hyphenateRE, '$1-$2')
     .toLowerCase();
 };

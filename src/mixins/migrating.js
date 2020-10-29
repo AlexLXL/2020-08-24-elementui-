@@ -32,12 +32,23 @@ export default {
     if (!this.$vnode) return;
     const { props = {}, events = {} } = this.getMigratingConfig();
     const { data, componentOptions } = this.$vnode;
+    /*
+    * data保存节点的属性：class，style和绑定的事件click那些
+    *
+    * <div class="parent" style="height:0" href="2222">1111</div>\
+    * data.attrs = { href:"2222" }
+    * */
     const definedProps = data.attrs || {};
+    /*
+    * componentOptions保存父子组件间的事件，props，插槽
+    *
+    * */
     const definedEvents = componentOptions.listeners || {};
 
     for (let propName in definedProps) {
       propName = kebabCase(propName); // compatible with camel case
       if (props[propName]) {
+        // 对发生改动的props或eventName发出警告
         console.warn(`[Element Migrating][${this.$options.name}][Attribute]: ${props[propName]}`);
       }
     }
