@@ -1,4 +1,5 @@
 import { kebabCase } from 'element-ui/src/utils/util';
+// kebabCase  短横线分隔命名
 /**
  * Show migrating guide in browser console.
  *
@@ -48,7 +49,7 @@ export default {
     for (let propName in definedProps) {
       propName = kebabCase(propName); // compatible with camel case
       if (props[propName]) {
-        // 对发生改动的props或eventName发出警告
+        // 对elementui更新发生改动的props或eventName发出警告
         console.warn(`[Element Migrating][${this.$options.name}][Attribute]: ${props[propName]}`);
       }
     }
