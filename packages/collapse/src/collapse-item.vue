@@ -85,6 +85,7 @@
     },
 
     computed: {
+      // ★通过provide-inject获取上层组件当前激活的子组件name（存在父组件的activeNames），控制显示隐藏
       isActive() {
         return this.collapse.activeNames.indexOf(this.name) > -1;
       }
@@ -100,8 +101,10 @@
           }
         }, 50);
       },
+      // 点击header（判断是否手风琴模块，做不同的操作）
       handleHeaderClick() {
         if (this.disabled) return;
+        // 传递过上层组件，触发$on('item-click')事件
         this.dispatch('ElCollapse', 'item-click', this);
         this.focusing = false;
         this.isClick = true;

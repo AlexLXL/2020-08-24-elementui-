@@ -47,6 +47,11 @@
       },
       handleItemClick(item) {
         if (this.accordion) {
+          /*
+          * 打开时关闭，
+          * 关闭时打开当前，关闭其它
+          *
+          * */
           this.setActiveNames(
             (this.activeNames[0] || this.activeNames[0] === 0) &&
             this.activeNames[0] === item.name
