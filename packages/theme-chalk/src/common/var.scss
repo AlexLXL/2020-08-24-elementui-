@@ -13,14 +13,29 @@ $--md-fade-transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1), opacity 3
 $--border-transition-base: border-color .2s cubic-bezier(.645,.045,.355,1) !default;
 $--color-transition-base: color .2s cubic-bezier(.645,.045,.355,1) !default;
 
+/*
+
+写ui前约定的设计规范  https://element.eleme.cn/2.12/#/zh-CN/component/color
+颜色:
+字体:
+边框:
+图标:
+
+该文件用于定义各种变量（颜色，字体大小，边框宽度等）
+
+*/
+
 /* Color
 -------------------------- */
-/// color|1|Brand Color|0
+// ===主色===
+// 主色(蓝)
 $--color-primary: #409EFF !default;
-/// color|1|Background Color|4
+// 混合色(白)
 $--color-white: #FFFFFF !default;
-/// color|1|Background Color|4
+// 混合色(白)
 $--color-black: #000000 !default;
+// 渐变色
+// mix 函数是 sass 中内置的函数，它表示 2 种颜色的混合，第三个参数表示第 1 种颜色占比
 $--color-primary-light-1: mix($--color-white, $--color-primary, 10%) !default; /* 53a8ff */
 $--color-primary-light-2: mix($--color-white, $--color-primary, 20%) !default; /* 66b1ff */
 $--color-primary-light-3: mix($--color-white, $--color-primary, 30%) !default; /* 79bbff */
@@ -30,6 +45,8 @@ $--color-primary-light-6: mix($--color-white, $--color-primary, 60%) !default; /
 $--color-primary-light-7: mix($--color-white, $--color-primary, 70%) !default; /* c6e2ff */
 $--color-primary-light-8: mix($--color-white, $--color-primary, 80%) !default; /* d9ecff */
 $--color-primary-light-9: mix($--color-white, $--color-primary, 90%) !default; /* ecf5ff */
+
+// ===辅助色===
 /// color|1|Functional Color|1
 $--color-success: #67C23A !default;
 /// color|1|Functional Color|1
@@ -48,6 +65,9 @@ $--color-success-lighter: mix($--color-white, $--color-success, 90%) !default;
 $--color-warning-lighter: mix($--color-white, $--color-warning, 90%) !default;
 $--color-danger-lighter: mix($--color-white, $--color-danger, 90%) !default;
 $--color-info-lighter: mix($--color-white, $--color-info, 90%) !default;
+
+// ===中性色===
+// 第一列
 /// color|1|Font Color|2
 $--color-text-primary: #303133 !default;
 /// color|1|Font Color|2
@@ -56,6 +76,8 @@ $--color-text-regular: #606266 !default;
 $--color-text-secondary: #909399 !default;
 /// color|1|Font Color|2
 $--color-text-placeholder: #C0C4CC !default;
+
+// 第二列
 /// color|1|Border Color|3
 $--border-color-base: #DCDFE6 !default;
 /// color|1|Border Color|3
@@ -64,6 +86,7 @@ $--border-color-light: #E4E7ED !default;
 $--border-color-lighter: #EBEEF5 !default;
 /// color|1|Border Color|3
 $--border-color-extra-light: #F2F6FC !default;
+
 
 // Background
 /// color|1|Background Color|4
@@ -105,6 +128,9 @@ $--fill-base: $--color-white !default;
 -------------------------- */
 $--font-path: 'fonts' !default;
 $--font-display: 'auto' !default;
+/*
+element-ui 定义了 6 种大小的字体
+*/
 /// fontSize|1|Font Size|0
 $--font-size-extra-large: 20px !default;
 /// fontSize|1|Font Size|0
@@ -121,6 +147,12 @@ $--font-size-extra-small: 12px !default;
 $--font-weight-primary: 500 !default;
 /// fontWeight|1|Font Weight|1
 $--font-weight-secondary: 100 !default;
+
+/*
+
+行高
+
+*/
 /// fontLineHeight|1|Line Height|2
 $--font-line-height-primary: 24px !default;
 /// fontLineHeight|1|Line Height|2
@@ -971,6 +1003,7 @@ $--md: 992px !default;
 $--lg: 1200px !default;
 $--xl: 1920px !default;
 
+// sass中的映射相当于对象，不过是使用括号
 $--breakpoints: (
   'xs' : (max-width: $--sm - 1),
   'sm' : (min-width: $--sm),

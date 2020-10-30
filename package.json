@@ -37,7 +37,7 @@
           "clean": {
             "des": "删除文件, rimraf等效封装rm -rf /dist/的插件。 /* 是拦截所有的文件夹，不包含子文件夹、/** 是拦截所有的文件夹及里面的子文件夹",
             "rimraf lib": "webpack --config build/webpack.component.js生成的",
-            "rimraf packages/*/lib": "删除样式theme-chalk里的lib? ===待加注释",
+            "rimraf packages/*/lib": "删除样式theme-chalk里的lib ===",
             "rimraf test/**/coverage": "===待加注释"
           },
           "build:file": {
@@ -59,7 +59,13 @@
             "作用": "国际化umd版本",
             "具体操作": "对src/locale/lang下的文件打包，生成umd格式文件，保存在lib/umd/locale"
           },
-          "npm run build:theme": "对packages/theme-chalk下的文件进行打包，===待加注释"
+          "npm run build:theme": {
+            "作用": "对packages/theme-chalk下的文件进行打包，===待加注释",
+            "node build/bin/gen-cssfile": "构建packages/theme-chalk/src/index.scss，生成入口文件",
+            "gulp build --gulpfile packages/theme-chalk/gulpfile.js": "gulp是一种基于流的打包方式，iviewUI和elementUI等UI库都是采用gulp进行样式构建的",
+            "g---------------------------------------------------.js": "构建文件输出到packages/theme-chalk/src/lib",
+            "cp-cli packages/theme-chalk/lib lib/theme-chalk": "构建结果拷贝到根目录lib下"
+          }
         },
         "pub": {
           "作用": "发布....",

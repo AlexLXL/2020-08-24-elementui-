@@ -1,7 +1,13 @@
 @import "common/var";
+/*
 
+@font-face 定义了自定义字体(c3的语法)，它的来源是 packages/theme-chalk/src/fonts/ 目录中定义的字体图标文件
+
+*/
+
+// 指定名为"element-icons"的字体，并指定在它的对应URL：
 @font-face {
-  font-family: 'element-icons';
+  font-family: 'element-icons'; // 注册自己的字体
   src: url('#{$--font-path}/element-icons.woff') format('woff'), /* chrome, firefox */
        url('#{$--font-path}/element-icons.ttf') format('truetype'); /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
   font-weight: normal;
@@ -11,7 +17,7 @@
 
 [class^="el-icon-"], [class*=" el-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'element-icons' !important;
+  font-family: 'element-icons' !important;  // 自定义成自己的字体
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -27,7 +33,7 @@
 }
 
 .el-icon-ice-cream-round:before {
-  content: "\e6a0";
+  content: "\e6a0"; // 每个字形对应unicode码
 }
 
 .el-icon-ice-cream-square:before {
